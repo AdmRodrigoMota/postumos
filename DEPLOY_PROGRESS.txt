@@ -1,0 +1,23 @@
+Progresso do Deploy - Postumos.com
+===================================
+
+✅ CONCLUÍDO:
+1. Upload de arquivos via FTP para /public_html/postumos/
+2. Banco de dados MySQL criado: querocomprarmeuc_postumos_db
+3. Usuário do banco criado: querocomprarmeuc_postumos_user
+4. Senha do banco: GmCZ&W*T?I7CN0wD
+5. Privilégios concedidos: TODOS
+6. Domínio postumos.com adicionado como Addon Domain
+7. Aplicação Node.js criada no cPanel
+   - URL: postumos.com
+   - Raiz: /home/querocomprarmeuc/postumos.com
+   - Arquivo de inicialização: dist/index.js
+   - Versão Node.js: 24.6.0
+
+⏳ PENDENTE:
+1. Executar instalação do NPM (botão "Executar a instalação do NPM")
+2. Adicionar variáveis de ambiente (DATABASE_URL, JWT_SECRET, etc.)
+3. Iniciar aplicação Node.js
+
+PRÓXIMO PASSO:
+Clicar no botão "Executar a instalação do NPM" (item 19-21 na interface)

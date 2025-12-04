@@ -1,0 +1,33 @@
+Status do Deploy - Postumos.com
+================================
+
+Data: $(date)
+
+PROGRESSO ATUAL:
+- ✅ Projeto desenvolvido e testado localmente
+- ✅ Banco de dados MySQL criado no cPanel
+- ✅ Domínio postumos.com adicionado no cPanel
+- ⏳ Fazendo login no GitHub (aguardando código de verificação)
+- ⏳ Criar repositório no GitHub
+- ⏳ Fazer push do código
+- ⏳ Deploy no Railway.app
+- ⏳ Configurar domínio
+
+CREDENCIAIS GITHUB:
+- Username: AdmRodrigoMota
+- Email: a**************@gmail.com
+- Status: Aguardando código de verificação por email
+
+PRÓXIMOS PASSOS:
+1. Inserir código de verificação do GitHub
+2. Criar repositório "postumos"
+3. Fazer push do código
+4. Criar conta no Railway.app
+5. Fazer deploy e configurar banco de dados
+6. Configurar domínio postumos.com
+
+BANCO DE DADOS (cPanel - backup):
+- Host: localhost
+- Database: querocomprarmeuc_postumos_db
+- User: querocomprarmeuc_postumos_user
+- Password: GmCZ&W*T?I7CN0wD

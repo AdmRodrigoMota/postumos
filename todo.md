@@ -68,3 +68,10 @@
 - [x] Criar Política de Privacidade
 - [x] Criar Termos de Uso
 - [x] Adicionar links para documentos legais no rodapé
+
+## Deploy em Andamento
+- [ ] Aguardando código de verificação do GitHub do usuário
+- [ ] Criar repositório no GitHub
+- [ ] Fazer push do código
+- [ ] Deploy no Railway.app
+- [ ] Configurar domínio postumos.com
