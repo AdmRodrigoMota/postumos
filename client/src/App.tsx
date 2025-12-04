@@ -5,6 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import CreateMemorial from "./pages/CreateMemorial";
+import Dashboard from "./pages/Dashboard";
 import EditMemorial from "./pages/EditMemorial";
 import Feed from "./pages/Feed";
 import Home from "./pages/Home";
@@ -20,6 +21,7 @@ function Router() {
       <Route path={"/memorial/:id/edit"} component={EditMemorial} />      <Route path="/my-memorials" component={MyMemorials} />
       <Route path="/search" component={Search} />
       <Route path="/feed" component={Feed} />
+      <Route path="/dashboard" component={Dashboard} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

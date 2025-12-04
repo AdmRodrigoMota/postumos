@@ -6,6 +6,7 @@ import { Heart, Eye, Calendar, Edit, Trash2, Loader2 } from "lucide-react";
 import { Link, useLocation, useRoute } from "wouter";
 import PhotoGallery from "@/components/PhotoGallery";
 import MessageWall from "@/components/MessageWall";
+import SocialShare from "@/components/SocialShare";
 import { toast } from "sonner";
 import {
   AlertDialog,
@@ -133,6 +134,12 @@ export default function MemorialProfile() {
                 </AlertDialog>
               </>
             )}
+            <SocialShare 
+              memorialName={profile.name}
+              memorialId={memorialId}
+              birthYear={birthYear || undefined}
+              deathYear={deathYear || undefined}
+            />
             <Button variant="ghost" size="sm" asChild>
               <Link href="/">
                 <span>Voltar</span>

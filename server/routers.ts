@@ -118,6 +118,11 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return db.getAllMemorialProfiles(input.limit);
       }),
+
+    listByCreator: protectedProcedure
+      .query(async ({ ctx }) => {
+        return db.getMemorialProfilesByCreator(ctx.user.id);
+      }),
   }),
 
   photo: router({

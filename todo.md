@@ -49,3 +49,12 @@
 - [x] Melhorar feedback visual em operações assíncronas
 - [x] Adicionar estados de loading em todas as páginas
 - [x] Adicionar botão de voltar em páginas internas
+
+## Funcionalidades Avançadas
+- [ ] Sistema de homenagens em datas especiais (aniversários e datas de falecimento)
+- [ ] Destacar perfis no feed em datas especiais
+- [x] Botões de compartilhamento para WhatsApp, Facebook e Twitter
+- [x] Preview personalizado para compartilhamento social
+- [x] Dashboard de estatísticas para criadores de perfis
+- [x] Gráficos de visitas e engajamento
+- [x] Criar perfis de teste completos com fotos e mensagens
