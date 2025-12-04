@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// Fixed: Use __dirname instead of import.meta.dirname for Node.js compatibility
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
