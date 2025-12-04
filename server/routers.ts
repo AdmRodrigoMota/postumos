@@ -78,15 +78,14 @@ export const appRouter = router({
 
     delete: protectedProcedure
       .input(z.object({ id: z.number() }))
-      .mutation(async ({ ctx, input }) => {
-        const profile = await db.getMemorialProfileById(input.id);
-        if (!profile) {
-          throw new TRPCError({ code: "NOT_FOUND", message: "Perfil memorial não encontrado" });
+      .mutation(async ({ input, ctx }) => {
+        const memorial = await db.getMemorialProfileById(input.id);
+        if (!memorial) {
+          throw new TRPCError({ code: "NOT_FOUND", message: "Memorial não encontrado" });
         }
-        if (profile.creatorId !== ctx.user.id) {
-          throw new TRPCError({ code: "FORBIDDEN", message: "Você não tem permissão para excluir este perfil" });
+        if (memorial.creatorId !== ctx.user.id) {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Você não tem permissão para excluir este memorial" });
         }
-        
         await db.deleteMemorialProfile(input.id);
         return { success: true };
       }),

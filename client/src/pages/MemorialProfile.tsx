@@ -64,7 +64,7 @@ export default function MemorialProfile() {
             </p>
             <Button asChild>
               <Link href="/">
-                <a>Voltar para Início</a>
+                <span>Voltar para Início</span>
               </Link>
             </Button>
           </CardContent>
@@ -83,20 +83,20 @@ export default function MemorialProfile() {
       <header className="border-b bg-card/50 backdrop-blur-sm">
         <div className="container py-4 flex justify-between items-center">
           <Link href="/">
-            <a className="flex items-center gap-2 text-2xl font-semibold text-foreground">
+            <span className="flex items-center gap-2 text-2xl font-semibold text-foreground cursor-pointer">
               <Heart className="h-7 w-7 text-primary" />
               <span>Postmus</span>
-            </a>
+            </span>
           </Link>
           <div className="flex items-center gap-3">
             {isOwner && (
               <>
                 <Button variant="outline" size="sm" asChild>
                   <Link href={`/memorial/${memorialId}/edit`}>
-                    <a className="flex items-center gap-2">
+                    <span className="flex items-center gap-2">
                       <Edit className="h-4 w-4" />
                       Editar
-                    </a>
+                    </span>
                   </Link>
                 </Button>
                 <AlertDialog>
@@ -135,7 +135,7 @@ export default function MemorialProfile() {
             )}
             <Button variant="ghost" size="sm" asChild>
               <Link href="/">
-                <a>Voltar</a>
+                <span>Voltar</span>
               </Link>
             </Button>
           </div>

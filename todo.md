@@ -38,3 +38,14 @@
 
 ## Bugs Reportados
 - [x] Corrigir erro de elementos anchor aninhados na página inicial
+
+## Melhorias para Deploy
+- [x] Implementar edição de perfis memoriais (atualizar foto, biografia, datas)
+- [x] Adicionar meta tags Open Graph para compartilhamento em redes sociais
+- [x] Melhorar página 404 com design personalizado
+- [x] Adicionar validações de formulários mais robustas
+- [x] Implementar tratamento de erros em uploads de imagens
+- [x] Adicionar confirmação antes de excluir perfis ou fotos
+- [x] Melhorar feedback visual em operações assíncronas
+- [x] Adicionar estados de loading em todas as páginas
+- [x] Adicionar botão de voltar em páginas internas
