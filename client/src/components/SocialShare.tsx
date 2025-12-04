@@ -19,7 +19,7 @@ export default function SocialShare({ memorialName, memorialId, birthYear, death
   const currentUrl = typeof window !== 'undefined' ? window.location.origin : '';
   const shareUrl = `${currentUrl}/memorial/${memorialId}`;
   const years = birthYear && deathYear ? `${birthYear} - ${deathYear}` : '';
-  const shareText = `Em memória de ${memorialName}${years ? ` (${years})` : ''} - Postmus`;
+  const shareText = `Em memória de ${memorialName}${years ? ` (${years})` : ''} - Postumos`;
 
   const shareOnWhatsApp = () => {
     const url = `https://wa.me/?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`;

@@ -11,7 +11,7 @@ export default function NotFound() {
         <div className="mb-8 flex justify-center">
           <div className="flex items-center gap-3">
             <Heart className="h-12 w-12 text-primary" />
-            <span className="text-3xl font-semibold text-foreground">Postmus</span>
+            <span className="text-3xl font-semibold text-foreground">Postumos</span>
           </div>
         </div>
 
@@ -53,7 +53,7 @@ export default function NotFound() {
 
         {/* Footer */}
         <p className="mt-8 text-sm text-muted-foreground">
-          © 2024 Postmus. Preservando memórias com respeito e dignidade.
+          © 2024 Postumos. Preservando memórias com respeito e dignidade.
         </p>
       </div>
     </div>

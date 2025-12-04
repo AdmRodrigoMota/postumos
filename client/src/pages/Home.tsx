@@ -29,7 +29,7 @@ export default function Home() {
           <Link href="/">
             <span className="flex items-center gap-2 text-2xl font-semibold text-foreground cursor-pointer">
               <Heart className="h-7 w-7 text-primary" />
-              <span>Postmus</span>
+              <span>Postumos</span>
             </span>
           </Link>
           <nav className="flex items-center gap-4">
@@ -190,7 +190,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t bg-card/50 backdrop-blur-sm mt-20">
         <div className="container py-8 text-center text-sm text-muted-foreground">
-          <p>© 2024 Postmus. Preservando memórias com respeito e dignidade.</p>
+          <p>© 2024 Postumos. Preservando memórias com respeito e dignidade.</p>
         </div>
       </footer>
     </div>

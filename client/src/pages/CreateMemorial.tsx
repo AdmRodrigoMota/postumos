@@ -138,7 +138,7 @@ export default function CreateMemorial() {
           <Link href="/">
             <a className="flex items-center gap-2 text-2xl font-semibold text-foreground">
               <Heart className="h-7 w-7 text-primary" />
-              <span>Postmus</span>
+              <span>Postumos</span>
             </a>
           </Link>
           <Link href="/my-memorials">

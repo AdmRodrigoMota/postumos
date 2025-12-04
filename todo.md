@@ -58,3 +58,6 @@
 - [x] Dashboard de estatísticas para criadores de perfis
 - [x] Gráficos de visitas e engajamento
 - [x] Criar perfis de teste completos com fotos e mensagens
+
+## Correções de Nome
+- [x] Atualizar "Postmus" para "Postumos" em todos os arquivos do projeto

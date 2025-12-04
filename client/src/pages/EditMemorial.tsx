@@ -206,7 +206,7 @@ export default function EditMemorial() {
           <Link href="/">
             <span className="flex items-center gap-2 text-2xl font-semibold text-foreground cursor-pointer">
               <Heart className="h-7 w-7 text-primary" />
-              <span>Postmus</span>
+              <span>Postumos</span>
             </span>
           </Link>
           <Button variant="outline" size="sm" asChild>
