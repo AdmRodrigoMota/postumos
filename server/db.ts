@@ -1,11 +1,21 @@
-import { eq } from "drizzle-orm";
+import { eq, desc, like, or, and, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { 
+  InsertUser, 
+  users, 
+  memorialProfiles, 
+  InsertMemorialProfile,
+  memorialPhotos,
+  InsertMemorialPhoto,
+  memorialMessages,
+  InsertMemorialMessage,
+  activities,
+  InsertActivity
+} from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
-// Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
@@ -89,4 +99,166 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// Memorial Profiles
+export async function createMemorialProfile(profile: InsertMemorialProfile) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const [result] = await db.insert(memorialProfiles).values(profile);
+  return Number(result.insertId);
+}
+
+export async function getMemorialProfileById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select().from(memorialProfiles).where(eq(memorialProfiles.id, id)).limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function getMemorialProfilesByCreator(creatorId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(memorialProfiles).where(eq(memorialProfiles.creatorId, creatorId)).orderBy(desc(memorialProfiles.createdAt));
+}
+
+export async function updateMemorialProfile(id: number, updates: Partial<InsertMemorialProfile>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(memorialProfiles).set(updates).where(eq(memorialProfiles.id, id));
+}
+
+export async function deleteMemorialProfile(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.delete(memorialProfiles).where(eq(memorialProfiles.id, id));
+}
+
+export async function searchMemorialProfiles(query: string) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(memorialProfiles)
+    .where(like(memorialProfiles.name, `%${query}%`))
+    .orderBy(desc(memorialProfiles.createdAt))
+    .limit(50);
+}
+
+export async function incrementVisitCount(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(memorialProfiles)
+    .set({ visitCount: sql`${memorialProfiles.visitCount} + 1` })
+    .where(eq(memorialProfiles.id, id));
+}
+
+export async function getAllMemorialProfiles(limit: number = 20) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(memorialProfiles).orderBy(desc(memorialProfiles.createdAt)).limit(limit);
+}
+
+// Memorial Photos
+export async function addMemorialPhoto(photo: InsertMemorialPhoto) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const [result] = await db.insert(memorialPhotos).values(photo);
+  return Number(result.insertId);
+}
+
+export async function getMemorialPhotos(memorialId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(memorialPhotos)
+    .where(eq(memorialPhotos.memorialId, memorialId))
+    .orderBy(desc(memorialPhotos.createdAt));
+}
+
+export async function deleteMemorialPhoto(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.delete(memorialPhotos).where(eq(memorialPhotos.id, id));
+}
+
+// Memorial Messages
+export async function addMemorialMessage(message: InsertMemorialMessage) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const [result] = await db.insert(memorialMessages).values(message);
+  return Number(result.insertId);
+}
+
+export async function getMemorialMessages(memorialId: number, includeHidden: boolean = false) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const conditions = includeHidden 
+    ? eq(memorialMessages.memorialId, memorialId)
+    : and(eq(memorialMessages.memorialId, memorialId), eq(memorialMessages.isHidden, false));
+  
+  return db.select().from(memorialMessages)
+    .where(conditions)
+    .orderBy(desc(memorialMessages.createdAt));
+}
+
+export async function reportMessage(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(memorialMessages)
+    .set({ isReported: true })
+    .where(eq(memorialMessages.id, id));
+}
+
+export async function hideMessage(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(memorialMessages)
+    .set({ isHidden: true })
+    .where(eq(memorialMessages.id, id));
+}
+
+export async function unhideMessage(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(memorialMessages)
+    .set({ isHidden: false, isReported: false })
+    .where(eq(memorialMessages.id, id));
+}
+
+export async function getReportedMessages() {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(memorialMessages)
+    .where(eq(memorialMessages.isReported, true))
+    .orderBy(desc(memorialMessages.createdAt));
+}
+
+// Activities
+export async function createActivity(activity: InsertActivity) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.insert(activities).values(activity);
+}
+
+export async function getRecentActivities(limit: number = 20) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(activities)
+    .orderBy(desc(activities.createdAt))
+    .limit(limit);
+}

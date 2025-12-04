@@ -1,31 +1,212 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getLoginUrl } from "@/const";
-import { Streamdown } from 'streamdown';
+import { Heart, Image, MessageCircle, Search } from "lucide-react";
+import { Link } from "wouter";
+import { trpc } from "@/lib/trpc";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Workflow, Frontend Best Practices, Design Guide and Common Pitfalls
- */
 export default function Home() {
-  // The userAuth hooks provides authentication state
-  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
+  const { user, loading } = useAuth();
+  const { data: recentProfiles } = trpc.memorial.getAll.useQuery({ limit: 6 });
 
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
+      {/* Header */}
+      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container py-4 flex justify-between items-center">
+          <Link href="/">
+            <a className="flex items-center gap-2 text-2xl font-semibold text-foreground">
+              <Heart className="h-7 w-7 text-primary" />
+              <span>Postmus</span>
+            </a>
+          </Link>
+          <nav className="flex items-center gap-4">
+            {user ? (
+              <>
+                <Link href="/feed">
+                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    Feed
+                  </a>
+                </Link>
+                <Link href="/search">
+                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    Buscar
+                  </a>
+                </Link>
+                <Link href="/my-memorials">
+                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    Meus Memoriais
+                  </a>
+                </Link>
+                <Link href="/create">
+                  <Button size="sm">Criar Memorial</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/search">
+                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                    Buscar Memoriais
+                  </a>
+                </Link>
+                <Button size="sm" asChild>
+                  <a href={getLoginUrl()}>Entrar</a>
+                </Button>
+              </>
+            )}
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="container py-20 md:py-32">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
+            Preserve Memórias que Vivem para Sempre
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Uma plataforma dedicada a homenagear e manter viva a memória de entes queridos. 
+            Compartilhe histórias, fotos e tributos em um espaço respeitoso e acolhedor.
+          </p>
+          <div className="flex gap-4 justify-center pt-4">
+            {user ? (
+              <Button size="lg" asChild>
+                <Link href="/create">
+                  <a>Criar Memorial</a>
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <Button size="lg" asChild>
+                  <a href={getLoginUrl()}>Começar Agora</a>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/search">
+                    <a>Explorar Memoriais</a>
+                  </Link>
+                </Button>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="container py-16 md:py-24">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+            Uma Homenagem Digna e Eterna
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="border-border/50 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader>
+                <Heart className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Perfis Memoriais</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Crie perfis completos com fotos, biografia e datas importantes para homenagear seus entes queridos.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/50 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader>
+                <Image className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Galeria de Fotos</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Preserve momentos especiais através de uma galeria de fotos compartilhada por familiares e amigos.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/50 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader>
+                <MessageCircle className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Mural de Mensagens</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Compartilhe tributos, condolências e memórias em um espaço respeitoso e acolhedor.
+                </CardDescription>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/50 shadow-sm hover:shadow-md transition-shadow">
+              <CardHeader>
+                <Search className="h-10 w-10 text-primary mb-2" />
+                <CardTitle className="text-lg">Busca Fácil</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Encontre perfis memoriais de forma simples e rápida através do sistema de busca.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Memorials */}
+      {recentProfiles && recentProfiles.length > 0 && (
+        <section className="container py-16 md:py-24 bg-card/30">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">
+              Memoriais Recentes
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recentProfiles.map((profile) => (
+                <Link key={profile.id} href={`/memorial/${profile.id}`}>
+                  <a>
+                    <Card className="border-border/50 shadow-sm hover:shadow-md transition-all hover:scale-[1.02] cursor-pointer">
+                      <CardHeader className="space-y-3">
+                        {profile.photoUrl && (
+                          <div className="w-full aspect-square rounded-lg overflow-hidden bg-muted">
+                            <img 
+                              src={profile.photoUrl} 
+                              alt={profile.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <CardTitle className="text-xl">{profile.name}</CardTitle>
+                          {profile.birthDate && profile.deathDate && (
+                            <CardDescription className="mt-1">
+                              {new Date(profile.birthDate).getFullYear()} - {new Date(profile.deathDate).getFullYear()}
+                            </CardDescription>
+                          )}
+                        </div>
+                      </CardHeader>
+                    </Card>
+                  </a>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Footer */}
+      <footer className="border-t bg-card/50 backdrop-blur-sm mt-20">
+        <div className="container py-8 text-center text-sm text-muted-foreground">
+          <p>© 2024 Postmus. Preservando memórias com respeito e dignidade.</p>
+        </div>
+      </footer>
     </div>
   );
 }
