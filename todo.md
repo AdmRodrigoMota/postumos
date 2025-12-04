@@ -61,3 +61,10 @@
 
 ## Correções de Nome
 - [x] Atualizar "Postmus" para "Postumos" em todos os arquivos do projeto
+
+## Preparação para Deploy
+- [x] Gerar favicon personalizado
+- [x] Criar página "Sobre Nós"
+- [x] Criar Política de Privacidade
+- [x] Criar Termos de Uso
+- [x] Adicionar links para documentos legais no rodapé

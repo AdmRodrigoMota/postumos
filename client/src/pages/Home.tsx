@@ -189,8 +189,23 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t bg-card/50 backdrop-blur-sm mt-20">
-        <div className="container py-8 text-center text-sm text-muted-foreground">
-          <p>© 2024 Postumos. Preservando memórias com respeito e dignidade.</p>
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-muted-foreground">
+              © 2024 Postumos. Preservando memórias com respeito e dignidade.
+            </div>
+            <div className="flex gap-6 text-sm">
+              <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">
+                Sobre Nós
+              </Link>
+              <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
+                Privacidade
+              </Link>
+              <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
+                Termos de Uso
+              </Link>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

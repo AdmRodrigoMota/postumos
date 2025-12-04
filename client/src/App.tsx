@@ -5,9 +5,12 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import CreateMemorial from "./pages/CreateMemorial";
+import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
 import EditMemorial from "./pages/EditMemorial";
 import Feed from "./pages/Feed";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import Home from "./pages/Home";
 import MemorialProfile from "./pages/MemorialProfile";
 import MyMemorials from "./pages/MyMemorials";
@@ -22,6 +25,9 @@ function Router() {
       <Route path="/search" component={Search} />
       <Route path="/feed" component={Feed} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/about" component={About} />
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/terms" component={Terms} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
