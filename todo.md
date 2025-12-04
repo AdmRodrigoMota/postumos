@@ -35,3 +35,6 @@
 ## Testes
 - [x] Testes automatizados para procedimentos principais
 - [x] Validação de funcionalidades críticas
+
+## Bugs Reportados
+- [x] Corrigir erro de elementos anchor aninhados na página inicial

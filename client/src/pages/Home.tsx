@@ -27,28 +27,22 @@ export default function Home() {
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container py-4 flex justify-between items-center">
           <Link href="/">
-            <a className="flex items-center gap-2 text-2xl font-semibold text-foreground">
+            <span className="flex items-center gap-2 text-2xl font-semibold text-foreground cursor-pointer">
               <Heart className="h-7 w-7 text-primary" />
               <span>Postmus</span>
-            </a>
+            </span>
           </Link>
           <nav className="flex items-center gap-4">
             {user ? (
               <>
-                <Link href="/feed">
-                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                    Feed
-                  </a>
+                <Link href="/feed" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Feed
                 </Link>
-                <Link href="/search">
-                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                    Buscar
-                  </a>
+                <Link href="/search" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Buscar
                 </Link>
-                <Link href="/my-memorials">
-                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                    Meus Memoriais
-                  </a>
+                <Link href="/my-memorials" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Meus Memoriais
                 </Link>
                 <Link href="/create">
                   <Button size="sm">Criar Memorial</Button>
@@ -56,10 +50,8 @@ export default function Home() {
               </>
             ) : (
               <>
-                <Link href="/search">
-                  <a className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                    Buscar Memoriais
-                  </a>
+                <Link href="/search" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Buscar Memoriais
                 </Link>
                 <Button size="sm" asChild>
                   <a href={getLoginUrl()}>Entrar</a>
@@ -82,21 +74,17 @@ export default function Home() {
           </p>
           <div className="flex gap-4 justify-center pt-4">
             {user ? (
-              <Button size="lg" asChild>
-                <Link href="/create">
-                  <a>Criar Memorial</a>
-                </Link>
-              </Button>
+              <Link href="/create">
+                <Button size="lg">Criar Memorial</Button>
+              </Link>
             ) : (
               <>
                 <Button size="lg" asChild>
                   <a href={getLoginUrl()}>Começar Agora</a>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/search">
-                    <a>Explorar Memoriais</a>
-                  </Link>
-                </Button>
+                <Link href="/search">
+                  <Button size="lg" variant="outline">Explorar Memoriais</Button>
+                </Link>
               </>
             )}
           </div>
@@ -171,29 +159,27 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recentProfiles.map((profile) => (
                 <Link key={profile.id} href={`/memorial/${profile.id}`}>
-                  <a>
-                    <Card className="border-border/50 shadow-sm hover:shadow-md transition-all hover:scale-[1.02] cursor-pointer">
-                      <CardHeader className="space-y-3">
-                        {profile.photoUrl && (
-                          <div className="w-full aspect-square rounded-lg overflow-hidden bg-muted">
-                            <img 
-                              src={profile.photoUrl} 
-                              alt={profile.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        )}
-                        <div>
-                          <CardTitle className="text-xl">{profile.name}</CardTitle>
-                          {profile.birthDate && profile.deathDate && (
-                            <CardDescription className="mt-1">
-                              {new Date(profile.birthDate).getFullYear()} - {new Date(profile.deathDate).getFullYear()}
-                            </CardDescription>
-                          )}
+                  <Card className="border-border/50 shadow-sm hover:shadow-md transition-all hover:scale-[1.02] cursor-pointer">
+                    <CardHeader className="space-y-3">
+                      {profile.photoUrl && (
+                        <div className="w-full aspect-square rounded-lg overflow-hidden bg-muted">
+                          <img 
+                            src={profile.photoUrl} 
+                            alt={profile.name}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
-                      </CardHeader>
-                    </Card>
-                  </a>
+                      )}
+                      <div>
+                        <CardTitle className="text-xl">{profile.name}</CardTitle>
+                        {profile.birthDate && profile.deathDate && (
+                          <CardDescription className="mt-1">
+                            {new Date(profile.birthDate).getFullYear()} - {new Date(profile.deathDate).getFullYear()}
+                          </CardDescription>
+                        )}
+                      </div>
+                    </CardHeader>
+                  </Card>
                 </Link>
               ))}
             </div>
