@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getLoginUrl } from "@/const";
+
 import { Heart, Image, MessageCircle, Search } from "lucide-react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
@@ -53,9 +53,9 @@ export default function Home() {
                 <Link href="/search" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                   Buscar Memoriais
                 </Link>
-                <Button size="sm" asChild>
-                  <a href={getLoginUrl()}>Entrar</a>
-                </Button>
+                <Link href="/login">
+                  <Button size="sm">Entrar</Button>
+                </Link>
               </>
             )}
           </nav>
@@ -79,9 +79,9 @@ export default function Home() {
               </Link>
             ) : (
               <>
-                <Button size="lg" asChild>
-                  <a href={getLoginUrl()}>Começar Agora</a>
-                </Button>
+                <Link href="/register">
+                  <Button size="lg">Começar Agora</Button>
+                </Link>
                 <Link href="/search">
                   <Button size="lg" variant="outline">Explorar Memoriais</Button>
                 </Link>

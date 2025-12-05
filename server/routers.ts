@@ -7,20 +7,12 @@ import * as db from "./db";
 import { TRPCError } from "@trpc/server";
 import { notifyOwner } from "./_core/notification";
 import { uploadRouter } from "./upload";
+import { authRouter } from "./auth-simple";
 
 export const appRouter = router({
   system: systemRouter,
   upload: uploadRouter,
-  auth: router({
-    me: publicProcedure.query(opts => opts.ctx.user),
-    logout: publicProcedure.mutation(({ ctx }) => {
-      const cookieOptions = getSessionCookieOptions(ctx.req);
-      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
-      return {
-        success: true,
-      } as const;
-    }),
-  }),
+  auth: authRouter,
 
   memorial: router({
     create: protectedProcedure

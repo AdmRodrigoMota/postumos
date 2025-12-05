@@ -15,11 +15,15 @@ import Home from "./pages/Home";
 import MemorialProfile from "./pages/MemorialProfile";
 import MyMemorials from "./pages/MyMemorials";
 import Search from "./pages/Search";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
       <Route path="/create" component={CreateMemorial} />      <Route path={"/memorial/:id"} component={MemorialProfile} />
       <Route path={"/memorial/:id/edit"} component={EditMemorial} />      <Route path="/my-memorials" component={MyMemorials} />
       <Route path="/search" component={Search} />
