@@ -34,7 +34,6 @@ export const authRouter = router({
         name: input.name,
         email: input.email,
         password: hashedPassword,
-        loginMethod: "email",
         openId: `email_${Date.now()}_${Math.random()}`,
       });
 
